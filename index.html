@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拾光</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="icon.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* 原版纯黑背景，无任何白色 */
+    body { background: #000; }
+
+    /* 官方原版：全屏容器 */
+    #player {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 官方原版：背景 canvas 全屏铺满 */
+    #player canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* ========== 核心修改：歌词整体右移 380px ========== */
+    .amll-lyric-player {
+      position: relative !important;
+      z-index: 10 !important;
+      /* 整体向右偏移，给左侧专辑面板留位置 */
+      margin-left: 380px;
+    }
+
+    /* ========== 左侧固定专辑面板（不重叠） ========== */
+    .album-panel {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 380px;
+      height: 100vh;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      backdrop-filter: blur(100px);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      background: transparent;
+    }
+
+    /* 方形专辑图 */
+    .album-square {
+      width: 280px;
+      height: 280px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .icon-square {
+      width: 60px;
+      height: 60px;
+    }
+
+    /* 歌曲信息 */
+    .song-info {
+      color: #fff;
+      text-align: center;
+    }
+    .song-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .song-detail {
+      font-size: 16px;
+      font-weight: 200;
+      color: #fff;
+    }
+    .song-artist {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* 原版音频样式 */
+    audio {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-BufZa_ra.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bg1yfPmd.css">
+</head>
+<body>
+  <div id="player">
+    <!-- 左侧固定专辑面板 -->
+    <div class="album-panel">
+      <img src="/icon.png" class="icon-square" alt="杭州市源清第二高级中学">
+      <img src="/cover.jpg" class="album-square" alt="专辑封面">
+      <div class="song-info">
+        <div class="song-title">拾光</div>
+        <div class="song-detail">杭州市源清第二高级中学校歌</div>
+        <div class="song-artist">杭州市源清第二高级中学</div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio" controls></audio>
+</body>
+</html>
